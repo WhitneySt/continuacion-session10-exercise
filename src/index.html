@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <figure class="figureLogo"><img alt="Logo" id="logoImage" /></figure>
+      <nav id="navHeader">
+        <span class="menu__item menu__item-active" id="menuAll">Todas</span>
+        <span class="menu__item" id="menuRated">Más valoradas</span>
+        <span class="menu__item" id="menuRecent">En Cartelera</span>
+        <span class="menu__item" id="menuFavorites">Mis favoritos</span>
+      </nav>
+      <div class="search">
+        <input
+          type="text"
+          placeholder="Busca tu película favorita"
+          class="search__input"
+          id="inputSearch"
+        />
+        <button class="search__button" id="buttonSearch">
+          <img src="./assets/images/search.png" id="searchImage" alt="Buscar" />
+        </button>
+      </div>
+    </header>
+    <main>
+      <h2>Todas las películas</h2>
+      <section id="container__movies"></section>
+      <div class="separator"></div>
+      <section id="paginator">
+        <button class="paginator__button" id="paginator__previus">
+          Anterior
+        </button>
+        <button class="paginator__button" id="paginator__next">
+          Siguiente
+        </button>
+      </section>
+    </main>
+
+    <aside id="modal__container" class="hidden">
+      <article id="modal">
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae consequatur nemo aut reprehenderit culpa nesciunt quas debitis eum. Esse ipsum eum aliquam nulla, eius omnis? Saepe cumque nam ab nobis.</p> -->
+      </article>
+    </aside>
+  </body>
+</html>
