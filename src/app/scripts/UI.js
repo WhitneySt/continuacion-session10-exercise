@@ -2,7 +2,7 @@
 import logo from "../../assets/images/logo.png";
 import search from "../../assets/images/search.png";
 import star from "../../assets/images/star.png";
-import { getMovieById } from "./services";
+import { addFavoriteDate, getFavorites, getMovieById, postFavorites } from "./services";
 
 //Generals
 const URL_MEDIA = "https://image.tmdb.org/t/p/original/";
@@ -69,19 +69,29 @@ containerMovies.addEventListener("click", async (e) => {
 });
 
 //Event over modal
-modalContainer.addEventListener("click", (e) => {
+modalContainer.addEventListener("click", async (e) => {
   console.log(e.target);
   if (e.target.id === "modal__container") {
     modalContainer.classList.add("hidden");
   }
   if (e.target.classList.contains("modal__button")) {
-    const favorites = sessionStorage.getItem('favorite') ? JSON.parse(sessionStorage.getItem('favorite')) : [];
-    const idMovie = e.target.getAttribute("data-id");
-    if (!favorites.includes(idMovie)) {
-      favorites.push(idMovie);
-      console.log(favorites);
-      sessionStorage.setItem('favorite', JSON.stringify(favorites));
-    }
+    // const favorites = sessionStorage.getItem('favorite') ? JSON.parse(sessionStorage.getItem('favorite')) : [];
+    const favorites = await getFavorites();
+    const idMovie = parseInt(e.target.getAttribute("data-id"));
+    const foundFavorite = favorites.find(fav => fav.idMovie === idMovie); 
+      if (!foundFavorite) {
+        // favorites.push(idMovie);
+        // console.log(favorites);
+        // sessionStorage.setItem("favorite", JSON.stringify(favorites));
+
+        const addDate = addFavoriteDate();
+        const favoriteMovie = {
+          idMovie,
+          addDate
+        }
+        console.log(favoriteMovie);
+        await postFavorites(favoriteMovie);
+      }
   }
 });
 
@@ -117,10 +127,9 @@ const renderSinapsis = (movieInfo) => {
 };
 
 const renderGenres = (arrayGenres) => {
-  let genreStrg = '';
-  arrayGenres.forEach(gener => {
+  let genreStrg = "";
+  arrayGenres.forEach((gener) => {
     genreStrg += `${gener.name} `;
- 
-  })
+  });
   return genreStrg;
-}
+};

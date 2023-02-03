@@ -11,7 +11,7 @@ module.exports = {
     filename: "js/app.bundle.js",
   },
   devServer: {
-    port: 5050,
+    port: 5055,
   },
   module: {
     rules: [
